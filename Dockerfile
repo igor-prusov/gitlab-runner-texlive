@@ -5,7 +5,9 @@ RUN chmod +x /usr/bin/dumb-init
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
-    apt-get install -y ca-certificates wget apt-transport-https vim nano lsb-release&& \
+    apt-get install -y ca-certificates wget apt-transport-https vim nano lsb-release gcc g++ make \
+            texlive texlive-lang-cyrillic texlive-latex-extra texlive-science texlive-xetex \
+            texlive-math-extra texlive-fonts-recommended texlive-fonts-extra && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -22,15 +24,6 @@ RUN echo "deb https://packages.gitlab.com/runner/gitlab-ci-multi-runner/ubuntu/ 
 
 ADD entrypoint /
 RUN chmod +x /entrypoint
-
-RUN apt-get update -y
-RUN apt-get install -y gcc g++ make
-RUN apt-get install -y texlive texlive-lang-cyrillic
-RUN apt-get install -y texlive-latex-extra
-RUN apt-get install -y texlive-science
-RUN apt-get install -y texlive-xetex
-RUN apt-get install -y texlive-math-extra
-RUN apt-get install -y texlive-fonts-recommended texlive-fonts-extra
 
 VOLUME ["/etc/gitlab-runner", "/home/gitlab-runner"]
 ENTRYPOINT ["/usr/bin/dumb-init", "/entrypoint"]
