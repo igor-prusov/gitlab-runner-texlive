@@ -5,7 +5,8 @@ RUN chmod +x /usr/bin/dumb-init
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
-    apt-get install -y ca-certificates wget apt-transport-https vim nano lsb-release gcc g++ make ruby-dev \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt-get install -y ca-certificates wget apt-transport-https vim nano lsb-release gcc g++ make ruby-dev gnupg \
             texlive texlive-lang-cyrillic texlive-latex-extra texlive-science texlive-xetex \
             texlive-fonts-recommended texlive-fonts-extra && \
     apt-get clean && \
